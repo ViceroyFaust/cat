@@ -1,4 +1,5 @@
 #include <fstream>
+#include <iterator>
 #include <iostream>
 
 int main (int argc, char* argv[]) {
@@ -12,12 +13,7 @@ int main (int argc, char* argv[]) {
             std::cout << "Error: " << argv[i] << " could not be opened\n";
             return 0;
         }
-        std::string output = "";
-        // As long as input has not reached EOF, it is > 0
-        while (input) {
-            std::getline(input, output);
-            std::cout << output << std::endl;
-        }
+        std::copy(std::istreambuf_iterator<char>(input), std::istreambuf_iterator<char>(), std::ostreambuf_iterator<char>(std::cout));
     }
     return 0;
 }
